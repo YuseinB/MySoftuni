@@ -1,2 +1,2 @@
-# Коментар ctr+/ в PyCharm
+# comment in PyCharmctr+/
 print('Hello SoftUni')
