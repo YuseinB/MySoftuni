@@ -1,2 +1,2 @@
-# comment in PyCharmctr+/
+# comment in PyCharm ctr+/
 print('Hello SoftUni')
