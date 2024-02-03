@@ -1,1 +1,1 @@
-Упражнения DevOps
+Exercise DevOps
