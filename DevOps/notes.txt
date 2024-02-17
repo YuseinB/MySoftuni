@@ -1,0 +1,61 @@
+#Най често използвани команди
+
+docker network ls
+
+#sazdavame mreja s ime mygoals
+docker network create mygoals
+
+#sazdavame volume s ime data
+docker volume create data
+
+#sazdavame oshte edin volum s ime node_modules tova e iziskvane ot zadachata
+docker volume create node_modules
+
+
+#sled kato vsichko tragne prilojenieto se logvame v docker hub s komanda docker login i pushvame imidjite saotvetno 
+docker tag goals-backend ribanec/goals-backend
+docker tag goals-frontend ribanec/goals-frontend
+
+docker push ribanec/goals-backend
+docker push ribanec/goals-frontend
+
+#konvertirame docker to docker-compose ot internet v2-v3
+docker run -d --name mongodb --network mygoals -e MONGO_INITDB_ROOT_USERNAME=max -e MONGO_INITDB_ROOT_PASSWORD=secret -v data:/data/db mongo:4.4
+
+--------------------------------------------------------------------------
+
+docker run -d --name mongodb --network mygoals -e MONGO_INITDB_ROOT_USERNAME=max -e MONGO_INITDB_ROOT_PASSWORD=secret -v data:/data/db mongo
+
+#ako ne raboti s tova mongo 
+docker run -d --name mongodb --network mygoals -e MONGO_INITDB_ROOT_USERNAME=max -e MONGO_INITDB_ROOT_PASSWORD=secret -v data:/data/db mongo:4.4
+
+
+
+#trqbwa da sazdadem promenlivi za parola i user za bazata danni ctrl+ahift+f  tarsime mongoos.connect
+
+docker run -d --name backend --network mygoals -p 80:80 -v logs:/logs -v node_modules:/node_modules goals-backend 
+
+docker run -d --name frontend --network mygoals -p 3000:3000 -v ./frontend/src:/src goals-frontend
+
+#tova spira conteinerite
+
+docker-compose down --volumes
+
+#tova startira docker-compose.yml faila v detach mongodb
+docker-compose up -d
+
+--------------------------------------------------------------------------
+
+docker build -t goals-frontend .
+
+#sazdava latest toest posledna versiq na mongo
+docker pull mongo
+
+#ako ne raboti trqbwa wersiq pod 5 slagame naprimer 4.4
+docker pull mongo:4.4
+
+--------------------------------------------------------------------------
+
+docker build -t goals-backend .
+
+--------------------------------------------------------------------------
